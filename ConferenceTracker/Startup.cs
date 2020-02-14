@@ -23,7 +23,7 @@ namespace ConferenceTracker
         public IConfiguration Configuration { get; }
         public string SecretMessage { get; set; }
 
-        private readonly string _allowedOrigins;
+        private readonly string _allowedOrigins = "_allowedOrigins";
 
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -75,7 +75,7 @@ namespace ConferenceTracker
             using (var context = scope.ServiceProvider.GetService<ApplicationDbContext>())
                 context.Database.EnsureCreated();
 
-            app.UseCors();
+            app.UseCors(_allowedOrigins);
             app.UseHttpsRedirection();
 
             app.UseCookiePolicy();
